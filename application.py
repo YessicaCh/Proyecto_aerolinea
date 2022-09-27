@@ -1,25 +1,12 @@
 from typing import List, Dict
+from model.flights import Flight
 import random
 
 """
 Implementación del proyecto de Aerolinea: 
 Estimar las ventas por pasajes de cada vuelo comercial
 """
-
-
-def main():
-    """
-    Función principal del módulo application
-    """
-
-    # Capacity = 168
-    # Premium =  24
-    # Economic = 144
-    # propuesta comprobar la capacidad
-    # Ver perdidas en lugar de ganancia 
-    # total = economicos*preciode asientos 
-
-    
+def create_list_flights():
     flights: List[Dict[str, str | int | float]] = [
         {
             "cod_ruta": "LIM - AYA",
@@ -38,10 +25,10 @@ def main():
             "base_price": 136.51,
             "economic_price":8,
             "premiun_price":16, 
-            "min_economic_sales": 130,
-            "max_economic_sales": 144,
-            "min_premium_sales": 15,
-            "max_premium_sales": 24,
+            "min_economic_seat": 130,
+            "max_economic_seat": 144,
+            "min_premium_seat": 15,
+            "max_premium_seat": 24,
         },
         {
             "cod_ruta": "LIM - ARE",
@@ -49,10 +36,10 @@ def main():
             "base_price": 90.59,
             "economic_price":8,
             "premiun_price":16, 
-            "min_economic_sales": 115,
-            "max_economic_sales": 138,
-            "min_premium_sales": 16,
-            "max_premium_sales": 22,
+            "min_economic_seat": 115,
+            "max_economic_seat": 138,
+            "min_premium_seat": 16,
+            "max_premium_seat": 22,
         },
         {
             "cod_ruta": "LIM - TAR",
@@ -60,10 +47,10 @@ def main():
             "base_price": 71.89,
             "economic_price":8,
             "premiun_price":16, 
-            "min_economic_sales": 100,
-            "max_economic_sales": 120,
-            "min_premium_sales": 12,
-            "max_premium_sales": 18,
+            "min_economic_seat": 100,
+            "max_economic_seat": 120,
+            "min_premium_seat": 12,
+            "max_premium_seat": 18,
         },
         {
             "cod_ruta": "AYA - LIM",
@@ -71,10 +58,10 @@ def main():
             "base_price": 40.42,
             "economic_price":7,
             "premiun_price":16, 
-            "min_economic_sales": 100,
-            "max_economic_sales": 115,
-            "min_premium_sales": 10,
-            "max_premium_sales": 15,
+            "min_economic_seat": 100,
+            "max_economic_seat": 115,
+            "min_premium_seat": 10,
+            "max_premium_seat": 15,
         },
         {
             "cod_ruta": "CUS - LIM",
@@ -82,10 +69,10 @@ def main():
             "base_price": 124.32,
             "economic_price":7,
             "premiun_price":16, 
-            "min_economic_sales": 105,
-            "max_economic_sales": 120,
-            "min_premium_sales": 14,
-            "max_premium_sales": 20,
+            "min_economic_seat": 105,
+            "max_economic_seat": 120,
+            "min_premium_seat": 14,
+            "max_premium_seat": 20,
         },
         {
             "cod_ruta": "ARE - LIM",
@@ -93,10 +80,10 @@ def main():
             "base_price": 86.59,
             "economic_price":7,
             "premiun_price":16, 
-            "min_economic_sales": 100,
-            "max_economic_sales": 110,
-            "min_premium_sales": 13,
-            "max_premium_sales": 28,
+            "min_economic_seat": 100,
+            "max_economic_seat": 110,
+            "min_premium_seat": 13,
+            "max_premium_seat": 28,
         },
         {
             "cod_ruta": "TAR - LIM",
@@ -104,28 +91,47 @@ def main():
             "base_price": 68.42,
             "economic_price":7,
             "premiun_price":16, 
-            "min_economic_sales": 90,
-            "max_economic_sales": 105,
-            "min_premium_sales": 10,
-            "max_premium_sales": 15,
+            "min_economic_seat": 90,
+            "max_economic_seat": 105,
+            "min_premium_seat": 10,
+            "max_premium_seat": 15,
         }
     ]
 
-    # costo de pasaje economico
+    # Creamos la lista de objetos Flights
+    List_flights: List[Flight] = []
+
+    for key, flight in enumerate(flights):
+        # Creamos el objeto Product
+        obj_flight = Flight(str(flight['cod_ruta']), 
+                            str(flight['name']), 
+                            float(flight['base_price']), 
+                            float(flight['economic_price']), 
+                            float(flight['premiun_price']),
+                            int(flight['min_economic_seat']),
+                            int(flight['max_economic_seat']),
+                            int(flight['min_premium_seat']),
+                            int(flight['max_premium_seat'])
+                            )
+        List_flights.append(obj_flight)
+
+    print(List_flights)
+
+
+def main():
     """
-    precio venta = precio base + valor de asiento economico
-    """
-    # costo de pasaje premiun
-    """
-    precio venta = precio base + valor de asiento premiun
- 
+    Función principal del módulo application
     """
 
-    #  precio venta final = precio venta + precio venta*18/100
+    # Capacity = 168
+    # Premium =  24
+    # Economic = 144
+    # propuesta comprobar la capacidad
+    # Ver perdidas en lugar de ganancia 
+    # total = economicos*preciode asientos 
 
-    print('Hola')
-    # print(flights)
+    
 
 
 if __name__ == "__main__":
-    main()
+    create_list_flights()
