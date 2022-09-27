@@ -31,8 +31,6 @@ def main():
             "max_economic_sales": 130,
             "min_premium_sales": 10,
             "max_premium_sales": 20,
-           
-
         },
         {
             "cod_ruta": "LIM - CUS",
