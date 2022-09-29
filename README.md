@@ -4,16 +4,24 @@ Una reconocida aerolínea está solicitando un programa informático para estima
 ## Stack Tecnológico 
 Python3 
 
-## crear enviroment con el nombre env 
+1) crear enviroment con el nombre env 
+```
 py -m venv env
+```
 
-## activar ambiente env 
+
+2) activar ambiente env 
+```
 source env/Scripts/Activate
+```
 
-## clonar el repositorio
+3) clonar el repositorio
+```
 git clone https://github.com/YessicaCh/Proyecto_aerolinea.git
+```
 
-## acceder la carpeta Proyecto_aerolinea
-## correr con 
+4) acceder la carpeta Proyecto_aerolinea y correr
+``` 
 py application.py 
+```
 
