@@ -134,47 +134,38 @@ def main():
 
     # ¿Cuál es el total de pasajes vendidos entre todos los vuelos?
     # Total de pasajes vendidos 
-    total:int = 0
+    total_passage:int = 0
+    sales_total_eco: float = 0
+    sales_total_pre:float = 0
+    total_IGV: float = 0
     for k,f in enumerate(List_flights):
         # Total de pasajes vendidos 
         economic_seat = f.get_rand_seating_economic()
         premium_seat = f.get_rand_seating_premium()
         total_seat = economic_seat + premium_seat
-        print("total seat",f.name,' : ', total_seat)
+        total_passage += total_seat
 
-        total += total_seat
+        # ¿Cuál es el total de ingresos por la venta de pasajes económicos?}
 
-    print('\n')
-    print("total :", total)
-    print('\n')
-
-    # ¿Cuál es el total de ingresos por la venta de pasajes económicos?
-    sales_total_eco = 0
-    for k,f in enumerate(List_flights):
         passage_econimic = f.sales_price_economic_total
-        total_passage_economic = round(f.get_rand_seating_economic() * passage_econimic, 2)
-        
-        print("Total de ventas de pasajes economicos de: ",f.cod_ruta,' : ', total_passage_economic)
-
+        total_passage_economic = round(economic_seat * passage_econimic, 2)          
         sales_total_eco += total_passage_economic
 
-    print('\n')
-    print("total de ventas economicos:", round(sales_total_eco, 2))
-    print('\n')
-        
-    # Total de pasajes vendidos
-    sales_total_pre = 0
-    for k, f in enumerate(List_flights):
-        passage_premium = f.sales_price_economic_total
-        total_passage_premium = round(f.get_rand_seating_premium() * passage_premium, 2)
-        
-        print("Total de ventas de pasajes premium por: ",f.cod_ruta,' : ', total_passage_premium)
+        # ¿Cuál es el total de ingresos por la venta de pasajes premium?
 
+        passage_premium = f.sales_price_economic_total
+        total_passage_premium = round(premium_seat * passage_premium, 2)
         sales_total_pre += total_passage_premium
 
-    print('\n')
-    print("total de ventras premium :", round(sales_total_pre, 2))
-    print('\n')
+        # ¿Cuál es el importe total de IGV cobrado?
+
+        total_IGV = economic_seat* f.IGV_economic + premium_seat*f.IGV_premium
+
+    print('* '*20)
+    print('Total de pasajes vendidos: {0:.2f}'.format(total_passage))
+    print('Total de ventas de pasajes economicos: {0:.2f}'.format(sales_total_eco))
+    print('Total de ventas de pasajes premium: {0:.2f}'.format(sales_total_pre))
+    print('Total IGV cobrado: {0:.2f}'.format(total_IGV))
         
 
 

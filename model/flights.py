@@ -29,7 +29,11 @@ class Flight(object):
         # calculo de precio final economico y premiun
         self.sales_price_economic_total:float = round(self.sales_price_economic + self.sales_price_economic*IGV_PERCENT/100,2)
         self.sales_price_premium_total:float = round(self.sales_price_premium + self.sales_price_economic*IGV_PERCENT/100,2)
+        
+        self.IGV_economic = round(self.sales_price_economic*IGV_PERCENT/100,2)
+        self.IGV_premium = round(self.sales_price_economic*IGV_PERCENT/100,2)
 
+    
 
     def get_rand_seating_economic(self) -> int:
         """
