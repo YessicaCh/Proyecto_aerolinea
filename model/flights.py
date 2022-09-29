@@ -1,5 +1,5 @@
 import random
-IGV_PERCENT = 18
+IGV_PERCENT:int = 18
 
 
 class Flight(object):
@@ -31,7 +31,6 @@ class Flight(object):
         self.sales_price_premium_total:float = round(self.sales_price_premium + self.sales_price_economic*IGV_PERCENT/100,2)
 
 
-
     def get_rand_seating_economic(self) -> int:
         """
         Devuelve un número de asientos de manera aleatoria basada en el rango
@@ -47,14 +46,7 @@ class Flight(object):
         return random.randint(self.min_premium_seat, self.max_premium_seat)
     
 
-    def calculate_amounts(self) -> None:
-        """
-        Actualiza los montos calculados que dependen del detalle del ticket
-        """
-        self.subtotal = sum([detail.total for key, detail in enumerate(self.list_detail)])
-        self.igv: float = self.subtotal*IGV_PERCENT/100
-        self.total: float = self.subtotal + self.igv
-        self.points: int = math.ceil(self.subtotal/VALUE_POINT)
+    
 
 
 

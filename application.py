@@ -14,10 +14,10 @@ def create_list_flights():
             "base_price": 55.19,
             "economic_price":8,
             "premiun_price":16, 
-            "min_economic_sales": 120,
-            "max_economic_sales": 130,
-            "min_premium_sales": 10,
-            "max_premium_sales": 20,
+            "min_economic_seat": 120,
+            "max_economic_seat": 130,
+            "min_premium_seat": 10,
+            "max_premium_seat": 20,
         },
         {
             "cod_ruta": "LIM - CUS",
@@ -101,21 +101,22 @@ def create_list_flights():
     # Creamos la lista de objetos Flights
     List_flights: List[Flight] = []
 
-    for key, flight in enumerate(flights):
+    for k,f in enumerate(flights):
         # Creamos el objeto Product
-        obj_flight = Flight(str(flight['cod_ruta']), 
-                            str(flight['name']), 
-                            float(flight['base_price']), 
-                            float(flight['economic_price']), 
-                            float(flight['premiun_price']),
-                            int(flight['min_economic_seat']),
-                            int(flight['max_economic_seat']),
-                            int(flight['min_premium_seat']),
-                            int(flight['max_premium_seat'])
+        
+        obj_flight = Flight(str(f['cod_ruta']), 
+                            str(f['name']), 
+                            float(f['base_price']), 
+                            float(f['economic_price']), 
+                            float(f['premiun_price']),
+                            int(f['min_economic_seat']),
+                            int(f['max_economic_seat']),
+                            int(f['min_premium_seat']),
+                            int(f['max_premium_seat'])
                             )
         List_flights.append(obj_flight)
 
-    print(List_flights)
+    return List_flights 
 
 
 def main():
@@ -127,11 +128,35 @@ def main():
     # Premium =  24
     # Economic = 144
     # propuesta comprobar la capacidad
-    # Ver perdidas en lugar de ganancia 
+    # Ver perdidas en lugar de ganancia  y ver en que horario ocurre mas perdidas
     # total = economicos*preciode asientos 
+    List_flights: List[Flight] = create_list_flights()
+
+    # ¿Cuál es el total de pasajes vendidos entre todos los vuelos?
+    # Total de pasajes vendidos 
+    total:int = 0
+    for k,f in enumerate(List_flights):
+        # Total de pasajes vendidos 
+        economic_seat = f.get_rand_seating_economic()
+        premium_seat = f.get_rand_seating_premium()
+        total_seat = economic_seat + premium_seat
+        print("total seat",f.name,' : ', total_seat)
+
+        total += total_seat
+
+    print('\n')
+    print("total :", total)
+    print('\n')
+
+    # ¿Cuál es el total de ingresos por la venta de pasajes económicos?
+    # Total de pasajes vendidos 
+        
+
+
 
     
 
 
 if __name__ == "__main__":
-    create_list_flights()
+    main()
+    #create_list_flights()
