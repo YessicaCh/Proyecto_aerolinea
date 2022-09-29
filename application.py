@@ -149,21 +149,32 @@ def main():
     print('\n')
 
     # ¿Cuál es el total de ingresos por la venta de pasajes económicos?
-    sales_total = 0
+    sales_total_eco = 0
     for k,f in enumerate(List_flights):
         passage_econimic = f.sales_price_economic_total
         total_passage_economic = round(f.get_rand_seating_economic() * passage_econimic, 2)
         
         print("Total de ventas de pasajes economicos de: ",f.cod_ruta,' : ', total_passage_economic)
 
-        sales_total += total_passage_economic
+        sales_total_eco += total_passage_economic
 
     print('\n')
-    print("total :", round(sales_total, 2))
+    print("total de ventas economicos:", round(sales_total_eco, 2))
     print('\n')
         
+    # Total de pasajes vendidos
+    sales_total_pre = 0
+    for k, f in enumerate(List_flights):
+        passage_premium = f.sales_price_economic_total
+        total_passage_premium = round(f.get_rand_seating_premium() * passage_premium, 2)
+        
+        print("Total de ventas de pasajes premium por: ",f.cod_ruta,' : ', total_passage_premium)
 
-    # Total de pasajes vendidos 
+        sales_total_pre += total_passage_premium
+
+    print('\n')
+    print("total de ventras premium :", round(sales_total_pre, 2))
+    print('\n')
         
 
 
