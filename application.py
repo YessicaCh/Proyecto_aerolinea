@@ -158,6 +158,7 @@ def main():
         sales_total_pre += total_passage_premium
 
         # ¿Cuál es el importe total de IGV cobrado?
+        # supones que el culculo total del IGV cobrado es la sumatoria de la camtidad total de asientos vendidos por cada el IGV de cada clase vendida.
 
         total_IGV = economic_seat* f.IGV_economic + premium_seat*f.IGV_premium
 
