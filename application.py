@@ -138,6 +138,13 @@ def main():
     sales_total_eco: float = 0
     sales_total_pre:float = 0
     total_IGV: float = 0
+    total_economic_seat: int = 0
+    total_premium_seat: int = 0
+    max_total_seat: int = 0
+    min_total_seat: int = 0
+    cod_rut_max: str = ""
+    cod_rut_min: str = ""
+
     for k,f in enumerate(List_flights):
         # Total de pasajes vendidos 
         economic_seat = f.get_rand_seating_economic()
@@ -162,17 +169,39 @@ def main():
 
         total_IGV = economic_seat* f.IGV_economic + premium_seat*f.IGV_premium
 
+        #¿Cuál es el valor promedio de un pasaje económico?
+        total_economic_seat += economic_seat
+
+        #¿Cuál es el valor promedio de un pasaje premium?
+        total_premium_seat += premium_seat
+
+        #¿Cuál fue el vuelo con la mayor cantidad de pasajeros?
+        print(total_seat)
+        if max_total_seat < total_seat:
+            max_total_seat = total_seat
+            cod_rut_max = f.cod_ruta
+
+        #¿Cuál fue el vuelo con la menor cantidad de pasajeros?
+        if k == 0: 
+            min_total_seat = total_seat
+        if min_total_seat > total_seat:
+            min_total_seat = total_seat
+            cod_rut_min = f.cod_ruta
+
+
+
+    avg_passage_economic: float = sales_total_eco/total_economic_seat
+    avg_passage_premium: float = sales_total_pre/total_premium_seat
+
     print('* '*20)
     print('Total de pasajes vendidos: {0:.2f}'.format(total_passage))
     print('Total de ventas de pasajes economicos: {0:.2f}'.format(sales_total_eco))
     print('Total de ventas de pasajes premium: {0:.2f}'.format(sales_total_pre))
     print('Total IGV cobrado: {0:.2f}'.format(total_IGV))
-        
-
-
-
-    
-
+    print('Promedio de pasajes económicos: {0:.2f}'.format(avg_passage_economic))
+    print('Promedio de pasajes premium: {0:.2f}'.format(avg_passage_premium))
+    print('Vuelo con mayor cantidad de pasajeros: ',cod_rut_max,'con',max_total_seat)
+    print('Vuelo con menor cantidad de pasajeros: ',cod_rut_min,'con ',min_total_seat)
 
 if __name__ == "__main__":
     main()
