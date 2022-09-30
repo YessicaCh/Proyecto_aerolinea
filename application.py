@@ -1,3 +1,4 @@
+from ast import Str
 from typing import List, Dict
 from model.flights import Flight
 import random
@@ -6,14 +7,17 @@ import random
 Implementación del proyecto de Aerolinea: 
 Estimar las ventas por pasajes de cada vuelo comercial
 """
+
+
 def create_list_flights():
     flights: List[Dict[str, str | int | float]] = [
         {
             "cod_ruta": "LIM - AYA",
             "name": "Lima - Ayacucho",
+            "plane": "A001",
             "base_price": 55.19,
-            "economic_price":8,
-            "premiun_price":16, 
+            "economic_price": 8,
+            "premiun_price": 16,
             "min_economic_seat": 120,
             "max_economic_seat": 130,
             "min_premium_seat": 10,
@@ -22,9 +26,10 @@ def create_list_flights():
         {
             "cod_ruta": "LIM - CUS",
             "name": "Lima - Cusco",
+            "plane": "A002",
             "base_price": 136.51,
-            "economic_price":8,
-            "premiun_price":16, 
+            "economic_price": 8,
+            "premiun_price": 16,
             "min_economic_seat": 130,
             "max_economic_seat": 144,
             "min_premium_seat": 15,
@@ -33,9 +38,10 @@ def create_list_flights():
         {
             "cod_ruta": "LIM - ARE",
             "name": "Lima - Arequipa",
+            "plane": "A003",
             "base_price": 90.59,
-            "economic_price":8,
-            "premiun_price":16, 
+            "economic_price": 8,
+            "premiun_price": 16,
             "min_economic_seat": 115,
             "max_economic_seat": 138,
             "min_premium_seat": 16,
@@ -44,9 +50,10 @@ def create_list_flights():
         {
             "cod_ruta": "LIM - TAR",
             "name": "Lima - Tarapoto",
+            "plane": "A004",
             "base_price": 71.89,
-            "economic_price":8,
-            "premiun_price":16, 
+            "economic_price": 8,
+            "premiun_price": 16,
             "min_economic_seat": 100,
             "max_economic_seat": 120,
             "min_premium_seat": 12,
@@ -55,9 +62,10 @@ def create_list_flights():
         {
             "cod_ruta": "AYA - LIM",
             "name": "Ayacucho - Lima",
+            "plane": "A001",
             "base_price": 40.42,
-            "economic_price":7,
-            "premiun_price":16, 
+            "economic_price": 7,
+            "premiun_price": 16,
             "min_economic_seat": 100,
             "max_economic_seat": 115,
             "min_premium_seat": 10,
@@ -66,9 +74,10 @@ def create_list_flights():
         {
             "cod_ruta": "CUS - LIM",
             "name": "Cusco - Lima",
+            "plane": "A002",
             "base_price": 124.32,
-            "economic_price":7,
-            "premiun_price":16, 
+            "economic_price": 7,
+            "premiun_price": 16,
             "min_economic_seat": 105,
             "max_economic_seat": 120,
             "min_premium_seat": 14,
@@ -77,9 +86,10 @@ def create_list_flights():
         {
             "cod_ruta": "ARE - LIM",
             "name": "Arequipa - Lima",
+            "plane": "A003",
             "base_price": 86.59,
-            "economic_price":7,
-            "premiun_price":16, 
+            "economic_price": 7,
+            "premiun_price": 16,
             "min_economic_seat": 100,
             "max_economic_seat": 110,
             "min_premium_seat": 13,
@@ -88,9 +98,10 @@ def create_list_flights():
         {
             "cod_ruta": "TAR - LIM",
             "name": "Tarapoto - Lima",
+            "plane": "A004",
             "base_price": 68.42,
-            "economic_price":7,
-            "premiun_price":16, 
+            "economic_price": 7,
+            "premiun_price": 16,
             "min_economic_seat": 90,
             "max_economic_seat": 105,
             "min_premium_seat": 10,
@@ -101,13 +112,14 @@ def create_list_flights():
     # Creamos la lista de objetos Flights
     List_flights: List[Flight] = []
 
-    for k,f in enumerate(flights):
+    for k, f in enumerate(flights):
         # Creamos el objeto Product
-        
-        obj_flight = Flight(str(f['cod_ruta']), 
-                            str(f['name']), 
-                            float(f['base_price']), 
-                            float(f['economic_price']), 
+
+        obj_flight = Flight(str(f['cod_ruta']),
+                            str(f['name']),
+                            str(f['plane']),
+                            float(f['base_price']),
+                            float(f['economic_price']),
                             float(f['premiun_price']),
                             int(f['min_economic_seat']),
                             int(f['max_economic_seat']),
@@ -116,7 +128,7 @@ def create_list_flights():
                             )
         List_flights.append(obj_flight)
 
-    return List_flights 
+    return List_flights
 
 
 def main():
@@ -129,14 +141,14 @@ def main():
     # Economic = 144
     # propuesta comprobar la capacidad
     # Ver perdidas en lugar de ganancia  y ver en que horario ocurre mas perdidas
-    # total = economicos*preciode asientos 
+    # total = economicos*preciode asientos
     List_flights: List[Flight] = create_list_flights()
 
     # ¿Cuál es el total de pasajes vendidos entre todos los vuelos?
-    # Total de pasajes vendidos 
-    total_passage:int = 0
+    # Total de pasajes vendidos
+    total_passage: int = 0
     sales_total_eco: float = 0
-    sales_total_pre:float = 0
+    sales_total_pre: float = 0
     total_IGV: float = 0
     total_economic_seat: int = 0
     total_premium_seat: int = 0
@@ -144,9 +156,11 @@ def main():
     min_total_seat: int = 0
     cod_rut_max: str = ""
     cod_rut_min: str = ""
+    list_f = []
+    dict_plane = dict()
 
-    for k,f in enumerate(List_flights):
-        # Total de pasajes vendidos 
+    for k, f in enumerate(List_flights):
+        # Total de pasajes vendidos
         economic_seat = f.get_rand_seating_economic()
         premium_seat = f.get_rand_seating_premium()
         total_seat = economic_seat + premium_seat
@@ -155,7 +169,7 @@ def main():
         # ¿Cuál es el total de ingresos por la venta de pasajes económicos?}
 
         passage_econimic = f.sales_price_economic_total
-        total_passage_economic = round(economic_seat * passage_econimic, 2)          
+        total_passage_economic = round(economic_seat * passage_econimic, 2)
         sales_total_eco += total_passage_economic
 
         # ¿Cuál es el total de ingresos por la venta de pasajes premium?
@@ -167,42 +181,70 @@ def main():
         # ¿Cuál es el importe total de IGV cobrado?
         # supones que el culculo total del IGV cobrado es la sumatoria de la camtidad total de asientos vendidos por cada el IGV de cada clase vendida.
 
-        total_IGV = economic_seat* f.IGV_economic + premium_seat*f.IGV_premium
+        total_IGV = economic_seat * f.IGV_economic + premium_seat*f.IGV_premium
 
-        #¿Cuál es el valor promedio de un pasaje económico?
+        # ¿Cuál es el valor promedio de un pasaje económico?
         total_economic_seat += economic_seat
 
-        #¿Cuál es el valor promedio de un pasaje premium?
+        # ¿Cuál es el valor promedio de un pasaje premium?
         total_premium_seat += premium_seat
 
-        #¿Cuál fue el vuelo con la mayor cantidad de pasajeros?
+        # ¿Cuál fue el vuelo con la mayor cantidad de pasajeros?
         print(total_seat)
         if max_total_seat < total_seat:
             max_total_seat = total_seat
             cod_rut_max = f.cod_ruta
 
-        #¿Cuál fue el vuelo con la menor cantidad de pasajeros?
-        if k == 0: 
+        # ¿Cuál fue el vuelo con la menor cantidad de pasajeros?
+        if k == 0:
             min_total_seat = total_seat
         if min_total_seat > total_seat:
             min_total_seat = total_seat
             cod_rut_min = f.cod_ruta
 
+        # Cuáles son los tres primeros vuelos que
+        # obtuvieron los mayores ingresos por la venta de asientos?
 
+        sales_total = total_passage_economic + total_passage_premium
 
+        list_f.append({
+            'objetc': f,
+            'sales_total': round(sales_total, 2)
+        })
+
+        if not f.plane in dict_plane:
+            dict_plane[f.plane] = total_seat
+        else:
+            dict_plane[f.plane] += total_seat
+
+    sort_list_f = sorted(list_f, key=lambda x: x['sales_total'], reverse=True)
     avg_passage_economic: float = sales_total_eco/total_economic_seat
     avg_passage_premium: float = sales_total_pre/total_premium_seat
 
     print('* '*20)
     print('Total de pasajes vendidos: {0:.2f}'.format(total_passage))
-    print('Total de ventas de pasajes economicos: {0:.2f}'.format(sales_total_eco))
-    print('Total de ventas de pasajes premium: {0:.2f}'.format(sales_total_pre))
+    print('Total de ventas de pasajes economicos: {0:.2f}'.format(
+        sales_total_eco))
+    print('Total de ventas de pasajes premium: {0:.2f}'.format(
+        sales_total_pre))
     print('Total IGV cobrado: {0:.2f}'.format(total_IGV))
-    print('Promedio de pasajes económicos: {0:.2f}'.format(avg_passage_economic))
+    print('Promedio de pasajes económicos: {0:.2f}'.format(
+        avg_passage_economic))
     print('Promedio de pasajes premium: {0:.2f}'.format(avg_passage_premium))
-    print('Vuelo con mayor cantidad de pasajeros: ',cod_rut_max,'con',max_total_seat)
-    print('Vuelo con menor cantidad de pasajeros: ',cod_rut_min,'con ',min_total_seat)
+    print('Vuelo con mayor cantidad de pasajeros: ',
+          cod_rut_max, 'con', max_total_seat)
+    print('Vuelo con menor cantidad de pasajeros: ',
+          cod_rut_min, 'con ', min_total_seat)
+
+    for f in sort_list_f[:3]:
+        print('Para el vuelo', f['objetc'].cod_ruta,
+              'ingreso', f['sales_total'])
+
+    # ¿Cuál fue el avión que transportó la mayor cantidad de pasajeros?
+    print('El avion con la mayor cantidad fue :', max(
+        dict_plane, key=dict_plane.get), dict_plane)
+
 
 if __name__ == "__main__":
     main()
-    #create_list_flights()
+    # create_list_flights()
