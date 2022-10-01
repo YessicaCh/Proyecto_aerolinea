@@ -1,25 +1,24 @@
 import random
-IGV_PERCENT: int = 18
+from config import IGV_PERCENT
 
 
 class Flight(object):
 
-    def __init__(self, cod_ruta: str, name: str, plane: str, base_price: float,
-                 economic_price: float, premium_price: float,
-                 min_economic_seat: int, max_economic_seat: int,
-                 min_premium_seat: int, max_premium_seat: int):
+    def __init__(self, cod_ruta: str, name: str, plane: str, base_price: float, economic_price: float, 
+                premium_price: float,min_economic_seat: int, max_economic_seat: int,min_premium_seat: int, 
+                max_premium_seat: int):
+        """
+        Constructor de la clase Vuelo (Flight)
+        """
 
         self.cod_ruta: str = cod_ruta
         self.name: str = name
         self.plane: str = plane
         self.base_price: float = base_price
-
         self.economic_price: float = economic_price
         self.premium_price: float = premium_price
-
         self.min_economic_seat: int = min_economic_seat
         self.max_economic_seat: int = max_economic_seat
-
         self.min_premium_seat: int = min_premium_seat
         self.max_premium_seat: int = max_premium_seat
 
@@ -28,7 +27,8 @@ class Flight(object):
             self.base_price + self.economic_price, 2)
         self.sales_price_premium: float = round(
             self.base_price + self.premium_price, 2)
-
+        
+        # calculo del IGV economico y premiun
         self.IGV_economic: float = round(
             self.sales_price_economic*IGV_PERCENT/100, 2)
         self.IGV_premium: float = round(
@@ -42,14 +42,14 @@ class Flight(object):
 
     def get_rand_seating_economic(self) -> int:
         """
-        Devuelve un número de asientos de manera aleatoria basada en el rango
-        de asientos mínimas y máximas del vuelo.
+        Devuelve un número de asientos economicos de manera aleatoria basada en el rango
+        de asientos mínimas y máximas .
         """
         return random.randint(self.min_economic_seat, self.max_economic_seat)
 
     def get_rand_seating_premium(self) -> int:
         """
-        Devuelve un número de asientos de manera aleatoria basada en el rango
-        de asientos mínimas y máximas del vuelo.
+        Devuelve un número de asientos premiun de manera aleatoria basada en el rango
+        de asientos mínimas y máximas .
         """
         return random.randint(self.min_premium_seat, self.max_premium_seat)

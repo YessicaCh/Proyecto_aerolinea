@@ -1,0 +1,4 @@
+IGV_PERCENT: int = 18
+CAPACITY: int = 168
+PREMIUM: int = 24
+ECONOMIC: int = 144
