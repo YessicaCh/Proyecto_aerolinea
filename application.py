@@ -1,5 +1,6 @@
 from typing import List, Dict
 from model.flights import Flight
+import operator
 
 """
 Implementación del proyecto de Aerolinea: 
@@ -216,29 +217,29 @@ def main():
 
     print('* '*20)
     # 1.-¿Cuál es el total de pasajes vendidos entre todos los vuelos?
-    print('Total de pasajes vendidos: {0:.2f}'.format(total_passage))
+    print('Total de pasajes vendidos:',total_passage)
 
     # 2.-¿Cuál es el total de ingresos por la venta de pasajes económicos?
-    print('Total de ventas de pasajes economicos: {0:.2f}'.format(
+    print('Total de ventas de pasajes economicos: $ {0:.2f}'.format(
         sales_total_eco))
 
     # 3.-¿Cuál es el total de ingresos por la venta de pasajes premium?
-    print('Total de ventas de pasajes premium: {0:.2f}'.format(
+    print('Total de ventas de pasajes premium: $ {0:.2f}'.format(
         sales_total_pre))
 
     # 4.-¿Cuál es el importe total de IGV cobrado?
-    print('Total IGV cobrado: {0:.2f}'.format(total_IGV))
+    print('Total IGV cobrado: $ {0:.2f}'.format(total_IGV))
 
     # 5.-¿Cuál es el valor promedio de un pasaje económico?
-    print('Promedio de pasajes económicos: {0:.2f}'.format(
+    print('Promedio de pasajes económicos: $ {0:.2f}'.format(
         avg_passage_economic))
 
     #  6.-¿Cuál es el valor promedio de un pasaje premium?
-    print('Promedio de pasajes premium: {0:.2f}'.format(avg_passage_premium))
+    print('Promedio de pasajes premium: $ {0:.2f}'.format(avg_passage_premium))
 
     # 7.-¿Cuál fue el vuelo con la mayor cantidad de pasajeros?
     max_flight: Flight = max_seats['objetc']
-    mim_flight: Flight = max_seats['objetc']
+    mim_flight: Flight = mim_seats['objetc']
     
     print("Vuelo con mayor cantidad de pasajeros es {cod_ruta} con  {seats}".format(
         cod_ruta =max_flight.cod_ruta, seats=max_seats['total_seat']))
@@ -250,7 +251,7 @@ def main():
     # 9.-¿Cuáles son los tres primeros vuelos que obtuvieron los mayores ingresos por la venta de asientos?
     for f in sort_list_f[:3]:
         print('Para el vuelo', f['objetc'].cod_ruta,
-              'ingreso', f['sales_total'])
+              'con un ingreso de $', f['sales_total'])
 
     # 10.-¿Cuál fue el avión que transportó la mayor cantidad de pasajeros?
 
